@@ -1,0 +1,99 @@
+// ================================
+// Typography Variables
+// ================================
+
+// Font Family
+$font-primary: 'Nunito Sans', sans-serif;
+
+// Text sizes and line heights
+$text-xs: 10px;
+$leading-xs: 16px;
+
+$text-s: 12px;
+$leading-s: 20px;
+
+$text-m: 14px;
+$leading-m: 24px;
+
+$text-l: 16px;
+$leading-l: 28px;
+
+$heading-s: 20px;
+$leading-heading-s: 32px;
+
+$heading-m: 24px;
+$leading-heading-m: 36px;
+
+$heading-l: 32px;
+$leading-heading-l: 44px;
+
+$display: 48px;
+$leading-display: 64px;
+
+// Font weights
+$font-regular: 400;
+$font-bold: 700;
+
+// ================================
+// Base Typography
+// ================================
+
+body {
+  font-family: $font-primary;
+  font-size: $text-m;
+  line-height: $leading-m;
+  color: var(--neutral-100); // Replace with SCSS variable if available
+}
+
+// ================================
+// Text styles
+// ================================
+
+.text-xs {
+  font-size: $text-xs;
+  line-height: $leading-xs;
+}
+.text-s {
+  font-size: $text-s;
+  line-height: $leading-s;
+}
+.text-m {
+  font-size: $text-m;
+  line-height: $leading-m;
+}
+.text-l {
+  font-size: $text-l;
+  line-height: $leading-l;
+}
+
+// ================================
+// Headings
+// ================================
+
+.heading-s {
+  font-size: $heading-s;
+  line-height: $leading-heading-s;
+}
+.heading-m {
+  font-size: $heading-m;
+  line-height: $leading-heading-m;
+}
+.heading-l {
+  font-size: $heading-l;
+  line-height: $leading-heading-l;
+}
+.display {
+  font-size: $display;
+  line-height: $leading-display;
+}
+
+// ================================
+// Weight variations
+// ================================
+
+.regular {
+  font-weight: $font-regular;
+}
+.bold {
+  font-weight: $font-bold;
+}

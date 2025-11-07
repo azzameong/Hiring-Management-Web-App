@@ -1,0 +1,80 @@
+@import "../tokens/color";
+
+$button-radius: 8px;
+$button-height-sm: 28px;
+$button-gap: 4px;
+
+@mixin icon-size($size: 10px) {
+  width: $size;
+  height: $size;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  img,
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 16px;
+  gap: $button-gap;
+
+  height: $button-height-sm;
+  border-radius: $button-radius;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+
+  .icon {
+    @include icon-size(10px);
+    margin-right: $button-gap;
+  }
+
+  &.no-icon .icon {
+    display: none;
+  }
+
+  // Hover dan Active default
+  &:hover {
+    filter: brightness(0.95);
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+// ------------------------------
+// Primary Button
+// ------------------------------
+.button--primary {
+  background: map-get($primary-color, main);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.12);
+
+  &:hover {
+    background: darken(map-get($primary-color, main), 5%);
+  }
+}
+
+// ------------------------------
+// Secondary Button
+// ------------------------------
+.button--secondary {
+  background: map-get($secondary-color, main);
+  color: #333;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.12);
+
+  &:hover {
+    background: darken(map-get($secondary-color, main), 5%);
+  }
+}
