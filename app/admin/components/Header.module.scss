@@ -1,0 +1,25 @@
+@import "../../../styles/tokens/color";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px; // jarak dari sisi kiri & kanan layar
+  height: 64px; // tinggi header bisa kamu sesuaikan
+  background-color: map-get($neutral-color, 10);
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.profile img {
+  display: block;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%; // kalau mau bentuk lingkaran
+  object-fit: cover;
+}
+
+.menuRight span {
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}

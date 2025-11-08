@@ -59,3 +59,7 @@ $success-color: (
 // Example usage:
 // color: map-get($primary-colors, main);
 // background: map-get($neutral-colors, 10);
+
+@function neutral-color($level) {
+  @return map-get($neutral-color, $level);
+}

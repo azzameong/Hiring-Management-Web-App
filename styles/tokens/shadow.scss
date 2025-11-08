@@ -1,1 +1,33 @@
-    
+@import './color.scss';
+
+// Shadow tokens
+$shadow-input: inset 1px 2px 2px rgba(0, 0, 0, 0.12);
+$shadow-button: 0px 1px 2px rgba(0, 0, 0, 0.12);
+$shadow-modal: 0px 4px 8px rgba(0, 0, 0, 0.1);
+
+// Border radius token
+$radius-md: 8px;
+
+// Shadow Input
+.shadow-input {
+  background: neutral-color(10);
+  border: 1px solid map-get($neutral-color, 40);
+  box-shadow: $shadow-input;
+  border-radius: $radius-md;
+}
+
+// Shadow Button
+.shadow-button {
+  background: neutral-color(10);
+  border: 1px solid map-get($neutral-color, 40);
+  box-shadow: $shadow-button;
+  border-radius: $radius-md;
+}
+
+// Shadow Modal
+.shadow-modal {
+  background: neutral-color(10);
+  border: 1px solid map-get($neutral-color, 40);
+  box-shadow: $shadow-modal;
+  border-radius: $radius-md;
+}

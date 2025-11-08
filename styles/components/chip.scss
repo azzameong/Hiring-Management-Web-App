@@ -1,0 +1,62 @@
+@import '../tokens/color.scss';
+
+.chip {
+  box-sizing: border-box;
+
+  // Layout
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  gap: 8px;
+
+  // Ukuran & posisi default (hilangkan absolute agar fleksibel)
+  min-width: 40px;
+  height: 32px;
+
+  // Style dasar (State: Rest)
+  background: neutral-color(10); // Neutral/10
+  border: 1px solid map-get($neutral-color, 40); // Neutral/40
+  border-radius: 16px;
+
+  // Tampilan teks
+  color: map-get($neutral-color, 90);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  // Hover effect
+  &:hover {
+    border-color: map-get($primary-color, main);
+    color: map-get($primary-color, main);
+  }
+
+  // State: Active / Selected
+  &.active {
+    background: neutral-color(10);
+    border: 1px solid map-get($primary-color, main);
+    color: map-get($primary-color, main);
+  }
+
+  // Icon kiri
+  .icon-left {
+    display: flex;
+    align-items: center;
+    margin-right: 4px;
+  }
+
+  // Icon kanan
+  .icon-right {
+    display: flex;
+    align-items: center;
+    margin-left: 4px;
+  }
+
+  // Teks chip
+  .chip-label {
+    display: flex;
+    align-items: center;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+}

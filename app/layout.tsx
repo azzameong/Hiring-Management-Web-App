@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
-import { Inter, Nunito_Sans } from "next/font/google";
+import { Nunito_Sans } from "next/font/google";
+import "../styles/globals.scss";
 import "../styles/main.scss";
-
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
 
 const nunito = Nunito_Sans({
   subsets: ["latin"],
@@ -27,9 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.variable} ${nunito.variable} antialiased`}
-      >
+      <body className={`${nunito.variable} antialiased`}>
         {children}
       </body>
     </html>

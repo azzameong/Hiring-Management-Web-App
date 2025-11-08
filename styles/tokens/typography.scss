@@ -1,11 +1,10 @@
-// ================================
-// Typography Variables
-// ================================
-
-// Font Family
 $font-primary: 'Nunito Sans', sans-serif;
 
-// Text sizes and line heights
+// Font weights
+$font-regular: 400;
+$font-bold: 700;
+
+// Font sizes & line heights
 $text-xs: 10px;
 $leading-xs: 16px;
 
@@ -30,10 +29,6 @@ $leading-heading-l: 44px;
 $display: 48px;
 $leading-display: 64px;
 
-// Font weights
-$font-regular: 400;
-$font-bold: 700;
-
 // ================================
 // Base Typography
 // ================================
@@ -42,58 +37,90 @@ body {
   font-family: $font-primary;
   font-size: $text-m;
   line-height: $leading-m;
-  color: var(--neutral-100); // Replace with SCSS variable if available
+  color: var(--neutral-100); 
 }
 
-// ================================
-// Text styles
-// ================================
-
-.text-xs {
+.text-xs-regular {
   font-size: $text-xs;
   line-height: $leading-xs;
-}
-.text-s {
-  font-size: $text-s;
-  line-height: $leading-s;
-}
-.text-m {
-  font-size: $text-m;
-  line-height: $leading-m;
-}
-.text-l {
-  font-size: $text-l;
-  line-height: $leading-l;
-}
-
-// ================================
-// Headings
-// ================================
-
-.heading-s {
-  font-size: $heading-s;
-  line-height: $leading-heading-s;
-}
-.heading-m {
-  font-size: $heading-m;
-  line-height: $leading-heading-m;
-}
-.heading-l {
-  font-size: $heading-l;
-  line-height: $leading-heading-l;
-}
-.display {
-  font-size: $display;
-  line-height: $leading-display;
-}
-
-// ================================
-// Weight variations
-// ================================
-
-.regular {
   font-weight: $font-regular;
 }
-.bold {
+.text-xs-bold {
+  font-size: $text-xs;
+  line-height: $leading-xs;
   font-weight: $font-bold;
 }
+
+.text-s-regular {
+  font-size: $text-s;
+  line-height: $leading-s;
+  font-weight: $font-regular;
+}
+.text-s-bold {
+  font-size: $text-s;
+  line-height: $leading-s;
+  font-weight: $font-bold;
+}
+
+.text-m-regular {
+  font-size: $text-m;
+  line-height: $leading-m;
+  font-weight: $font-regular;
+}
+.text-m-bold {
+  font-size: $text-m;
+  line-height: $leading-m;
+  font-weight: $font-bold;
+}
+
+.text-l-regular {
+  font-size: $text-l;
+  line-height: $leading-l;
+  font-weight: $font-regular;
+}
+.text-l-bold {
+  font-size: $text-l;
+  line-height: $leading-l;
+  font-weight: $font-bold;
+}
+
+.heading-s-regular {
+  font-size: $heading-s;
+  line-height: $leading-heading-s;
+  font-weight: $font-regular;
+}
+.heading-s-bold {
+  font-size: $heading-s;
+  line-height: $leading-heading-s;
+  font-weight: $font-bold;
+}
+
+.heading-m-regular {
+  font-size: $heading-m;
+  line-height: $leading-heading-m;
+  font-weight: $font-regular;
+}
+.heading-m-bold {
+  font-size: $heading-m;
+  line-height: $leading-heading-m;
+  font-weight: $font-bold;
+}
+
+.heading-l-regular {
+  font-size: $heading-l;
+  line-height: $leading-heading-l;
+  font-weight: $font-regular;
+}
+.heading-l-bold {
+  font-size: $heading-l;
+  line-height: $leading-heading-l;
+  font-weight: $font-bold;
+}
+
+.display-bold {
+  font-size: $display;
+  line-height: $leading-display;
+  font-weight: $font-bold;
+}
+
+

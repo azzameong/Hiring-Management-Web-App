@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -30,7 +31,6 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-          
             Deploy Now
           </a>
           <a
@@ -40,8 +40,11 @@ export default function Home() {
           >
             Documentation
           </a>
-          <button className="button button--primary">Primary Action</button>
+          <Link href="/admin">
+            <button className="button button--neutral button--md">Primary Action</button>
+          </Link>
           <button className="button button--secondary">Secondary Action</button>
+          <div className="chip">Example Azza</div>
         </div>
       </main>
     </div>
