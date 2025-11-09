@@ -8,7 +8,7 @@ export default function Header() {
       </div>
       <div className={styles.profile}>
         <img
-          src="/images/Avatar.png" // ganti sesuai lokasi gambar kamu
+          src="/images/avatar.png" // ganti sesuai lokasi gambar kamu
           width={28}
           height={28}
           alt="Profile"

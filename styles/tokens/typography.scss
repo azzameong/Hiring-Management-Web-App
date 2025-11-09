@@ -4,30 +4,30 @@ $font-primary: 'Nunito Sans', sans-serif;
 $font-regular: 400;
 $font-bold: 700;
 
-// Font sizes & line heights
-$text-xs: 10px;
-$leading-xs: 16px;
+// Font sizes & line heights (rem)
+$text-xs: 0.625rem; // 10px
+$leading-xs: 1rem; // 16px
 
-$text-s: 12px;
-$leading-s: 20px;
+$text-s: 0.75rem; // 12px
+$leading-s: 1.25rem; // 20px
 
-$text-m: 14px;
-$leading-m: 24px;
+$text-m: 0.875rem; // 14px
+$leading-m: 1.5rem; // 24px
 
-$text-l: 16px;
-$leading-l: 28px;
+$text-l: 1rem; // 16px
+$leading-l: 1.75rem; // 28px
 
-$heading-s: 20px;
-$leading-heading-s: 32px;
+$heading-s: 1.25rem; // 20px
+$leading-heading-s: 2rem; // 32px
 
-$heading-m: 24px;
-$leading-heading-m: 36px;
+$heading-m: 1.5rem; // 24px
+$leading-heading-m: 2.25rem; // 36px
 
-$heading-l: 32px;
-$leading-heading-l: 44px;
+$heading-l: 2rem; // 32px
+$leading-heading-l: 2.75rem; // 44px
 
-$display: 48px;
-$leading-display: 64px;
+$display: 3rem; // 48px
+$leading-display: 4rem; // 64px
 
 // ================================
 // Base Typography

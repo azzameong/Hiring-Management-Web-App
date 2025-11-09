@@ -1,7 +1,12 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import React, { useState } from "react";
+import TextField from "../components/text-field/text-field";
 
 export default function Home() {
+  const [nama, setNama] = useState("");
+
   return (
     <div>
       <main>
@@ -45,6 +50,17 @@ export default function Home() {
           </Link>
           <button className="button button--secondary">Secondary Action</button>
           <div className="chip">Example Azza</div>
+          <div>
+            <TextField
+              label="Nama Lengkap"
+              value={nama}
+              onChange={(e) => setNama(e.target.value)}
+              helperText="Wajib diisi"
+              maxLength={50}
+              required
+              mode="rest"
+            />
+          </div>
         </div>
       </main>
     </div>
