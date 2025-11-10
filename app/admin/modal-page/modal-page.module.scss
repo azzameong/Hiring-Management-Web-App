@@ -1,0 +1,70 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.32);
+  z-index: 1000;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 900px;
+  height: 780px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translate(-50%, -50%);
+  z-index: 1010;
+}
+
+.modalHeader {
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  border-bottom: 1px solid #eee;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+
+  svg {
+    width: 24px;
+    height: 24px;
+    color: #888;
+  }
+}
+
+.modalContent {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 16px 24px 16px 24px;
+}
+
+.modalFooter {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 24px;
+  border-top: 1px solid #eee;
+  background: #fff;
+}

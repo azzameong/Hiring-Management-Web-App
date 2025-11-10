@@ -6,6 +6,11 @@
   -moz-osx-font-smoothing: grayscale; 
 }
 
+html, body {
+  overscroll-behavior: none;
+  overscroll-behavior-y: none;
+}
+
 :root {
   font-size: 16px;
 }

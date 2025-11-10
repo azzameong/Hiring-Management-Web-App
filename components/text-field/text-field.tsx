@@ -52,12 +52,19 @@ const TextField: React.FC<TextFieldProps> = ({
         {rightIcon && <span className={styles.icon}>{rightIcon}</span>}
       </div>
 
-      <div className={styles.helperRow}>
-        <span className={styles.helperText}>{helperText}</span>
-        <span className={styles.counter}>
-          {value.length} / {maxLength}
-        </span>
-      </div>
+      {/* Hanya render helperRow jika helperText ada atau showCounter true */}
+      {(helperText || maxLength) && (
+        <div className={styles.helperRow}>
+          {helperText && (
+            <span className={styles.helperText}>{helperText}</span>
+          )}
+          {maxLength && (
+            <span className={styles.counter}>
+              {value.length} / {maxLength}
+            </span>
+          )}
+        </div>
+      )}
     </div>
   );
 };

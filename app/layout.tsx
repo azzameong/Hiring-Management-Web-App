@@ -21,6 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/logogram.png" type="image/x-icon" />
+      </head>
       <body className={`${nunito.variable} antialiased`}>
         {children}
       </body>

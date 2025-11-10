@@ -1,14 +1,16 @@
 import React from "react";
-import Header from "./components/Header";
+import Header from "./components/header/header";
+import SearchBar from "./components/search-bar/search-bar";
+import Menu from "./components/menu/menu";
+import ModalPage from "./modal-page/modal-page";
 
 const AdminPage = () => {
   return (
     <div>
       <Header />
       <main>
-        <h1>Admin Dashboard</h1>
-        <p>Selamat datang di halaman admin.</p>
-        {/* Tambahkan konten admin lainnya di sini */}
+        <SearchBar />
+        <Menu />
       </main>
     </div>
   );
