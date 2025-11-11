@@ -41,7 +41,7 @@ export default function Dropdown({ label, required, options }: DropdownProps) {
           <DropdownMenu.Content
             className={styles.dropdown__menu}
             sideOffset={8}
-            style={menuWidth ? { width: menuWidth } : undefined}
+            style={menuWidth ? { width: menuWidth, zIndex: 1100 } : { zIndex: 1100 }}
           >
             {options.map((option) => (
               <DropdownMenu.Item

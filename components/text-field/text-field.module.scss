@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
-  width: 320px;
+  width: 100%; // Ubah dari 320px ke 100%
   height: 96px;
 }
 
@@ -26,7 +26,7 @@
   padding: 8px 16px;
   gap: 8px;
 
-  width: 320px;
+  width: 100%; // Ubah dari 320px ke 100%
   height: 40px;
 
   background: #ffffff;
@@ -60,6 +60,7 @@
 }
 
 .helperRow {
+  margin-top: 4px;
   display: flex;
   justify-content: space-between;
   align-items: center;

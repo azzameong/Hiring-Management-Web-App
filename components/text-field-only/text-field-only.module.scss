@@ -1,0 +1,41 @@
+@import "../../styles/tokens/color.scss";
+@import "../../styles/tokens/typography.scss";
+
+.text-field-only {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &__label-row {
+    display: flex;
+    justify-content: flex-start; // Ubah dari flex-end ke flex-start
+    gap: 4px;
+    margin-bottom: 12px;
+  }
+
+  &__label {
+    @extend .text-s-regular;
+    color: map-get($neutral-color, 90);
+  }
+
+  &__asterisk {
+    color: map-get($danger-color, main);
+    margin-left: 2px;
+  }
+
+  &__input {
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid map-get($neutral-color, 40);
+    padding: 0 12px;
+    @extend .text-m-regular;
+    color: map-get($neutral-color, 100);
+    background: map-get($neutral-color, 10);
+
+    &::placeholder {
+      color: map-get($neutral-color, 60);
+      @extend .text-m-regular;
+    }
+  }
+}
