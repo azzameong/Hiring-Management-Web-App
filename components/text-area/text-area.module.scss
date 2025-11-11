@@ -1,0 +1,71 @@
+@import '../../styles/tokens/color.scss';
+@import '../../styles/tokens/typography.scss';
+
+.textAreaWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 320px;
+}
+
+.labelRow {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+
+  .label {
+    @extend .text-s-regular;
+    color: map-get($neutral-color, 90);
+  }
+  .required {
+    color: map-get($danger-color, main);
+    font-size: inherit;
+    line-height: inherit;
+  }
+}
+
+.textAreaInput {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 8px 16px;
+  gap: 8px;
+  width: 320px;
+  height: 88px;
+  background: map-get($neutral-color, 10);
+  border: 2px solid map-get($neutral-color, 40);
+  border-radius: 8px;
+  font-family: $font-primary;
+  font-size: $text-m;
+  line-height: $leading-m;
+  resize: none;
+
+  &:focus {
+    outline: none;
+    border-color: map-get($primary-color, border);
+  }
+}
+
+.bottomRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 8px;
+  min-height: 20px; // to keep height if no helper/counter
+
+  .helperText {
+    @extend .text-s-regular;
+    color: map-get($neutral-color, 70);
+  }
+  .counterText {
+    @extend .text-s-regular;
+    color: map-get($neutral-color, 60);
+    margin-left: auto;
+  }
+}
+
+.extraContent {
+  margin-top: 4px;
+}

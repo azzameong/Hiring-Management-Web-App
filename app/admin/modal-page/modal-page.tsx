@@ -14,7 +14,9 @@ const ModalPage: React.FC<ModalPageProps> = ({ open, onOpenChange, children }) =
       <div className={styles.overlay} />
       <Dialog.Content className={styles.modal}>
         <div className={styles.modalHeader}>
-          <span className={styles.title}>Job Opening</span>
+          <Dialog.Title asChild>
+            <span className={styles.title}>Job Opening</span>
+          </Dialog.Title>
           <Dialog.Close asChild>
             <button className={styles.closeBtn} aria-label="Close">
               <svg width="24" height="24" viewBox="0 0 24 24">

@@ -1,0 +1,94 @@
+@use "../../styles/tokens/color" as *;
+@use "../../styles/tokens/typography" as *;
+
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  &__label {
+    @extend .text-s-regular;
+    color: neutral-color(90);
+
+    span {
+      color: map-get($danger-color, main);
+      margin-left: 2px;
+    }
+  }
+
+  &__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    width: 100%;
+    padding: 0 12px;
+    border: 1px solid map-get($neutral-color, 40);
+    border-radius: 8px;
+    background-color: neutral-color(10);
+    color: neutral-color(90);
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    @extend .text-m-regular;
+
+    &::placeholder {
+      color: neutral-color(60);
+    }
+
+    &:hover {
+      border-color: map-get($primary-color, border);
+    }
+
+    &:focus,
+    &[data-state="open"] {
+      outline: none;
+      border-color: map-get($primary-color, main);
+      box-shadow: 0 0 0 2px map-get($primary-color, focus);
+    }
+
+    svg {
+      transition: transform 0.2s ease;
+      color: neutral-color(70);
+      flex-shrink: 0;
+    }
+
+    &[data-state="open"] svg {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__menu {
+    margin-top: 8px;
+    background-color: neutral-color(10);
+    border: 1px solid map-get($neutral-color, 40);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    padding: 4px 0;
+    min-width: 100%;
+    width: 100%;
+    z-index: 20;
+  }
+
+  &__item {
+    @extend .text-s-bold;
+    color: neutral-color(100);
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background-color: map-get($primary-color, surface);
+    }
+
+    &[data-highlighted] {
+      background-color: map-get($primary-color, surface);
+      color: map-get($primary-color, main);
+    }
+
+    &[data-disabled] {
+      color: neutral-color(60);
+      cursor: not-allowed;
+    }
+  }
+}

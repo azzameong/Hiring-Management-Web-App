@@ -4,7 +4,12 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.menuLeft}>
-        <span>Job List</span>
+        <span
+          className="text-xl-bold"
+          style={{ color: 'var(--neutral-100)' }}
+        >
+          Job List
+        </span>
       </div>
       <div className={styles.profile}>
         <img

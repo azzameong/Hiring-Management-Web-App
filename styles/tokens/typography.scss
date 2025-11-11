@@ -17,6 +17,9 @@ $leading-m: 1.5rem; // 24px
 $text-l: 1rem; // 16px
 $leading-l: 1.75rem; // 28px
 
+$text-xl: 1.125rem; // 18px
+$leading-xl: 2rem; // 32px
+
 $heading-s: 1.25rem; // 20px
 $leading-heading-s: 2rem; // 32px
 
@@ -81,6 +84,17 @@ body {
 .text-l-bold {
   font-size: $text-l;
   line-height: $leading-l;
+  font-weight: $font-bold;
+}
+
+.text-xl-regular {
+  font-size: $text-xl;
+  line-height: $leading-xl;
+  font-weight: $font-regular;
+}
+.text-xl-bold {
+  font-size: $text-xl;
+  line-height: $leading-xl;
   font-weight: $font-bold;
 }
 
