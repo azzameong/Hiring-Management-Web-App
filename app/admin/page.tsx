@@ -2,23 +2,34 @@ import React from "react";
 import Header from "./components/header/header";
 import SearchBar from "./components/search-bar/search-bar";
 import Menu from "./components/menu/menu";
-import ModalPage from "./modal-page/modal-page";
-import TextArea from "@/components/text-area/text-area";
-
-import Dropdown from "@/components/dropdown/dropdown";
+import JobCard from "./components/job-card/job-card";
+import styles from "./page.module.scss";
 
 const AdminPage = () => {
   return (
-    <div>
+    <div className={styles.page}>
       <Header />
-      <main>
-        <SearchBar />
-        <Menu />
-        <Dropdown
-        label="Pilih Kategori"
-        required
-        options={["Frontend", "Backend", "Fullstack"]}
-      />
+
+      <main className={styles.mainContent}>
+        {/* Kolom kiri */}
+        <div className={styles.leftColumn}>
+          <div className={styles.topBar}>
+            <SearchBar />
+          </div>
+
+          <div className={styles.scrollArea}>
+            {[...Array(20)].map((_, i) => (
+              <div key={i}>
+                <JobCard />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Kolom kanan */}
+        <div className={styles.rightColumn}>
+          <Menu />
+        </div>
       </main>
     </div>
   );

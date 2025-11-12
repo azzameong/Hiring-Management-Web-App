@@ -7,7 +7,7 @@
   align-items: center;
   padding: 0;
   gap: 16px;
-  width: 1043px;
+  width: 100%;
   height: 44px;
   flex: none;
   order: 1;
@@ -38,4 +38,13 @@
     font-family: $font-primary;
     opacity: 1;
   }
+}
+
+.iconButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
 }

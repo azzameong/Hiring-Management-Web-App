@@ -1,25 +1,40 @@
 "use client";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { UilAngleDown } from "@iconscout/react-unicons";
-import { useState, useRef, useLayoutEffect, useState as useReactState } from "react";
+import { useState, useRef, useLayoutEffect, useState as useReactState, useEffect } from "react";
 import styles from "./dropdown.module.scss";
 
 interface DropdownProps {
   label: string;
   required?: boolean;
   options: string[];
+  value?: string; 
+  onSelect?: (value: string) => void; 
 }
 
-export default function Dropdown({ label, required, options }: DropdownProps) {
-  const [selected, setSelected] = useState("Pilih opsi");
+export default function Dropdown({ label, required, options, value, onSelect }: DropdownProps) {
+  const [selected, setSelected] = useState(value || "Pilih opsi");
   const triggerRef = useRef<HTMLButtonElement>(null);
   const [menuWidth, setMenuWidth] = useReactState<number>();
+
+  useEffect(() => {
+    if (value) {
+      setSelected(value);
+    }
+  }, [value]);
 
   useLayoutEffect(() => {
     if (triggerRef.current) {
       setMenuWidth(triggerRef.current.offsetWidth);
     }
   }, [triggerRef.current]);
+
+  const handleSelect = (option: string) => {
+    setSelected(option);
+    if (onSelect) {
+      onSelect(option);
+    }
+  };
 
   return (
     <div className={styles.dropdown}>
@@ -47,7 +62,7 @@ export default function Dropdown({ label, required, options }: DropdownProps) {
               <DropdownMenu.Item
                 key={option}
                 className={styles.dropdown__item}
-                onSelect={() => setSelected(option)}
+                onSelect={() => handleSelect(option)} 
               >
                 {option}
               </DropdownMenu.Item>

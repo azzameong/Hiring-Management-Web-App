@@ -1,13 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import styles from "./menu.module.scss";
-import ModalPage from "../../modal-page/modal-page";
+import ModalPage from "../modal-page/modal-page";
 import TextField from "@/components/text-field/text-field";
 import { UilAngleDown } from "@iconscout/react-unicons"; // Pastikan sudah install: npm i @iconscout/react-unicons
 import Dropdown from "@/components/dropdown/dropdown";
 import TextArea from "@/components/text-area/text-area";
 import { TextFieldOnly } from "@/components/text-field-only/text-field-only";
 import Chip from "@/components/chip/chip";
+import { supabase } from "@/lib/supabaseClient"; // atau path sesuai project Anda
 
 const profileFields = [
   { label: "Full name", key: "fullName", type: "fixed" },
@@ -30,8 +31,36 @@ const initialProfileState = {
 
 const Menu: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleSubmit = async () => {
+    try {
+      const { data, error } = await supabase.from("jobs").insert([
+        {
+          job_name: jobName,
+          job_type: jobType,
+          job_description: jobDescription,
+          candidates_needed: candidatesNeeded,
+          salary_min: salaryMin,
+          salary_max: salaryMax,
+        },
+      ]);
+
+      console.log("data:", data);
+      console.log("error:", error);
+
+      if (error) throw error;
+      alert("✅ Job berhasil dipublish!");
+      setIsModalOpen(false);
+    } catch (err) {
+      console.error("Error inserting job:", err);
+      alert("❌ Gagal membuat job");
+    }
+  };
   const [jobName, setJobName] = useState("");
   const [jobType, setJobType] = useState("");
+  const [jobDescription, setJobDescription] = useState("");
+  const [candidatesNeeded, setCandidatesNeeded] = useState(0);
+  const [salaryMin, setSalaryMin] = useState(0);
+  const [salaryMax, setSalaryMax] = useState(0);
   const [profileState, setProfileState] = useState(initialProfileState);
 
   const handleProfileChipClick = (key: string, value: string) => {
@@ -58,11 +87,18 @@ const Menu: React.FC = () => {
         </div>
       </div>
 
-      <ModalPage open={isModalOpen} onOpenChange={setIsModalOpen}>
+      <ModalPage
+        open={isModalOpen}
+        onOpenChange={setIsModalOpen}
+        onSubmit={handleSubmit} // ✅ panggil di sini
+      >
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           <TextFieldOnly
             label="Job Name"
-            placeholder="Ex. Frontend Engineer"
+            value={jobName}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setJobName(e.target.value)
+            }
             required
           />
           <Dropdown
@@ -75,16 +111,25 @@ const Menu: React.FC = () => {
               "Internship",
               "Freelance",
             ]}
+            value={jobType} // ✅ Tambahkan prop value
+            onSelect={(selected: string) => {
+              console.log("Dropdown selected:", selected);
+              setJobType(selected);
+            }}
           />
           <TextArea
             label="Job Description"
             placeholder="Describe the job role, responsibilities, and requirements..."
             required
+            value={jobDescription}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setJobDescription(e.target.value)}
           />
           <TextFieldOnly
             label="Number of Candidate Needed"
             placeholder="Ex. 2"
             required
+            value={candidatesNeeded}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCandidatesNeeded(Number(e.target.value))}
           />
         </div>
 
@@ -118,6 +163,8 @@ const Menu: React.FC = () => {
                 label="Minimum Estimated Salary"
                 placeholder="Rp 7.000.000"
                 required
+                value={salaryMin}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSalaryMin(Number(e.target.value))}
               />
             </div>
             <div
@@ -138,6 +185,8 @@ const Menu: React.FC = () => {
                 label="Maximum Estimated Salary"
                 placeholder="Rp 8.000.000"
                 required
+                value={salaryMax}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSalaryMax(Number(e.target.value))}
               />
             </div>
           </div>
