@@ -30,7 +30,7 @@ const ModalPage: React.FC<ModalPageProps> = ({ open, onOpenChange, children }) =
           {children}
         </div>
         <div className={styles.modalFooter}>
-          <button className="button button--md button--neutral" style={{ marginLeft: "auto" }}>
+          <button className="button button--md button--primary" style={{ marginLeft: "auto" }}>
             Publish Job
           </button>
         </div>

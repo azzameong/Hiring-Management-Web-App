@@ -49,7 +49,7 @@ export default function Home() {
             <button className="button button--neutral button--md">Primary Action</button>
           </Link>
           <button className="button button--secondary">Secondary Action</button>
-          <div className="chip">Example Azza</div>
+          <div className="chip chip-active">Example Azza</div>
           <div>
             <TextField
               label="Nama Lengkap"

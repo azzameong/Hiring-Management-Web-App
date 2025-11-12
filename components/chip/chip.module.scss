@@ -1,0 +1,59 @@
+@import '../../styles/tokens/color.scss';
+
+.chip {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  gap: 8px;
+  min-width: 40px;
+  height: 32px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+
+  .icon-left {
+    display: flex;
+    align-items: center;
+    margin-right: 4px;
+  }
+
+  .icon-right {
+    display: flex;
+    align-items: center;
+    margin-left: 4px;
+  }
+
+  .chip-label {
+    display: flex;
+    align-items: center;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+}
+
+// State: Rest
+.chip-rest {
+  background: neutral-color(10);
+  border: 1px solid map-get($neutral-color, 40);
+  color: map-get($neutral-color, 90);
+  cursor: pointer;
+}
+
+// State: Active
+.chip-active {
+  background: neutral-color(10);
+  border: 1px solid map-get($primary-color, main);
+  color: map-get($primary-color, main);
+  cursor: pointer;
+}
+
+// State: Disabled
+.chip-disabled {
+  background: neutral-color(30);
+  border: 1px solid map-get($neutral-color, 40);
+  color: map-get($neutral-color, 60);
+  cursor: not-allowed;
+  pointer-events: none;
+}
