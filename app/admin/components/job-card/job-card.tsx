@@ -5,18 +5,39 @@ import styles from "./job-card.module.scss";
 const TOGGLE_STATES = ["Draft", "Active", "Inactive"] as const;
 type ToggleState = typeof TOGGLE_STATES[number];
 
-export default function JobCard() {
-  const [status, setStatus] = useState<ToggleState>("Draft");
-  const startedOn = "2025-11-12";
+interface JobCardProps {
+  jobTitle: string;
+  salaryMin: number;
+  salaryMax: number;
+  startedOn: string;
+  initialStatus?: ToggleState;
+}
 
-  const jobTitle = "Frontend Developer";
-  const salary = "Rp 10.000.000";
+export default function JobCard({ 
+  jobTitle, 
+  salaryMin, 
+  salaryMax, 
+  startedOn, 
+  initialStatus = "Draft" 
+}: JobCardProps) {
+  const [status, setStatus] = useState<ToggleState>(initialStatus);
 
   const handleToggle = () => {
     const currentIdx = TOGGLE_STATES.indexOf(status);
     const nextIdx = (currentIdx + 1) % TOGGLE_STATES.length;
     setStatus(TOGGLE_STATES[nextIdx]);
   };
+
+  // Format salary sebagai currency Indonesia
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('id-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      minimumFractionDigits: 0,
+    }).format(amount);
+  };
+
+  const salaryRange = `${formatCurrency(salaryMin)} - ${formatCurrency(salaryMax)}`;
 
   // Tentukan kelas toggle sesuai status
   const toggleClass =
@@ -42,7 +63,7 @@ export default function JobCard() {
       <div className={styles.contentRow}>
         <div className={styles.leftContent}>
           <div className={styles.jobTitle}>{jobTitle}</div>
-          <div className={styles.salary}>{salary}</div>
+          <div className={styles.salary}>{salaryRange}</div>
         </div>
         <div className={styles.rightContent}>
           <button className={`${styles.manageButton} button button--sm button--primary`}>

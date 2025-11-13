@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import styles from "./menu.module.scss";
 import ModalPage from "../modal-page/modal-page";
 import TextField from "@/components/text-field/text-field";
-import { UilAngleDown } from "@iconscout/react-unicons"; // Pastikan sudah install: npm i @iconscout/react-unicons
+import { UilAngleDown } from "@iconscout/react-unicons";
 import Dropdown from "@/components/dropdown/dropdown";
 import TextArea from "@/components/text-area/text-area";
 import { TextFieldOnly } from "@/components/text-field-only/text-field-only";
 import Chip from "@/components/chip/chip";
-import { supabase } from "@/lib/supabaseClient"; // atau path sesuai project Anda
+import { supabase } from "@/lib/supabaseClient";
 
 const profileFields = [
   { label: "Full name", key: "fullName", type: "fixed" },
@@ -29,32 +29,12 @@ const initialProfileState = {
   dob: "mandatory",
 };
 
-const Menu: React.FC = () => {
+interface MenuProps {
+  onJobCreated?: () => void;
+}
+
+const Menu: React.FC<MenuProps> = ({ onJobCreated }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleSubmit = async () => {
-    try {
-      const { data, error } = await supabase.from("jobs").insert([
-        {
-          job_name: jobName,
-          job_type: jobType,
-          job_description: jobDescription,
-          candidates_needed: candidatesNeeded,
-          salary_min: salaryMin,
-          salary_max: salaryMax,
-        },
-      ]);
-
-      console.log("data:", data);
-      console.log("error:", error);
-
-      if (error) throw error;
-      alert("✅ Job berhasil dipublish!");
-      setIsModalOpen(false);
-    } catch (err) {
-      console.error("Error inserting job:", err);
-      alert("❌ Gagal membuat job");
-    }
-  };
   const [jobName, setJobName] = useState("");
   const [jobType, setJobType] = useState("");
   const [jobDescription, setJobDescription] = useState("");
@@ -62,6 +42,67 @@ const Menu: React.FC = () => {
   const [salaryMin, setSalaryMin] = useState(0);
   const [salaryMax, setSalaryMax] = useState(0);
   const [profileState, setProfileState] = useState(initialProfileState);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async () => {
+    if (!jobName || !jobType || !jobDescription || candidatesNeeded <= 0 || salaryMin <= 0 || salaryMax <= 0) {
+      alert("❌ Please fill all required fields");
+      return;
+    }
+
+    if (salaryMin >= salaryMax) {
+      alert("❌ Maximum salary must be greater than minimum salary");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const { data, error } = await supabase
+        .from("jobs")
+        .insert([
+          {
+            job_name: jobName,
+            job_type: jobType,
+            job_description: jobDescription,
+            candidates_needed: candidatesNeeded,
+            salary_min: salaryMin,
+            salary_max: salaryMax,
+            created_at: new Date().toISOString(),
+          },
+        ])
+        .select();
+
+      console.log("Supabase insert response:", { data, error }); // Tambahkan ini
+
+      if (error) {
+        console.error("Supabase error:", error);
+        throw error;
+      }
+
+      console.log("Job created successfully:", data);
+      alert("✅ Job berhasil dipublish!");
+      setIsModalOpen(false);
+
+      // Reset form
+      setJobName("");
+      setJobType("");
+      setJobDescription("");
+      setCandidatesNeeded(0);
+      setSalaryMin(0);
+      setSalaryMax(0);
+      setProfileState(initialProfileState);
+
+      // Refresh jobs di parent component
+      if (onJobCreated) {
+        onJobCreated();
+      }
+    } catch (err) {
+      console.error("Error inserting job:", err);
+      alert("❌ Gagal membuat job: " + (err as Error).message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const handleProfileChipClick = (key: string, value: string) => {
     setProfileState((prev) => ({
@@ -90,7 +131,7 @@ const Menu: React.FC = () => {
       <ModalPage
         open={isModalOpen}
         onOpenChange={setIsModalOpen}
-        onSubmit={handleSubmit} // ✅ panggil di sini
+        onSubmit={handleSubmit}
       >
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           <TextFieldOnly
@@ -111,9 +152,8 @@ const Menu: React.FC = () => {
               "Internship",
               "Freelance",
             ]}
-            value={jobType} // ✅ Tambahkan prop value
+            value={jobType}
             onSelect={(selected: string) => {
-              console.log("Dropdown selected:", selected);
               setJobType(selected);
             }}
           />
@@ -127,9 +167,10 @@ const Menu: React.FC = () => {
           <TextFieldOnly
             label="Number of Candidate Needed"
             placeholder="Ex. 2"
+            type="number"
             required
-            value={candidatesNeeded}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCandidatesNeeded(Number(e.target.value))}
+            value={candidatesNeeded || ""}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCandidatesNeeded(Number(e.target.value) || 0)}
           />
         </div>
 
@@ -144,12 +185,12 @@ const Menu: React.FC = () => {
           <hr
             style={{
               border: "none",
-              borderTop: "1px dashed #9E9E9E", // neutral-60
+              borderTop: "1px dashed #9E9E9E",
               marginBottom: 12,
               width: "100%",
             }}
           />
-          <span className="text-s-m">Job Salary </span>
+          <span className="text-s-m">Job Salary</span>
           <div
             style={{
               display: "flex",
@@ -161,10 +202,11 @@ const Menu: React.FC = () => {
             <div style={{ flex: 1 }}>
               <TextFieldOnly
                 label="Minimum Estimated Salary"
-                placeholder="Rp 7.000.000"
+                placeholder="7000000"
+                type="number"
                 required
-                value={salaryMin}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSalaryMin(Number(e.target.value))}
+                value={salaryMin || ""}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSalaryMin(Number(e.target.value) || 0)}
               />
             </div>
             <div
@@ -183,10 +225,11 @@ const Menu: React.FC = () => {
             <div style={{ flex: 1 }}>
               <TextFieldOnly
                 label="Maximum Estimated Salary"
-                placeholder="Rp 8.000.000"
+                placeholder="10000000"
+                type="number"
                 required
-                value={salaryMax}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSalaryMax(Number(e.target.value))}
+                value={salaryMax || ""}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSalaryMax(Number(e.target.value) || 0)}
               />
             </div>
           </div>
@@ -219,7 +262,6 @@ const Menu: React.FC = () => {
                     {field.label}
                   </span>
                   <div style={{ display: "flex", gap: 8 }}>
-                    {/* Mandatory */}
                     <Chip
                       label="Mandatory"
                       state={
@@ -236,7 +278,6 @@ const Menu: React.FC = () => {
                           : undefined
                       }
                     />
-                    {/* Optional */}
                     <Chip
                       label="Optional"
                       state={
@@ -253,7 +294,6 @@ const Menu: React.FC = () => {
                           : undefined
                       }
                     />
-                    {/* Off */}
                     <Chip
                       label="Off"
                       state={
