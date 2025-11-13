@@ -6,6 +6,7 @@ import Menu from "./components/menu/menu";
 import JobCard from "./components/job-card/job-card";
 import { supabase } from "@/lib/supabaseClient";
 import styles from "./page.module.scss";
+import { useRouter } from "next/navigation";
 
 interface Job {
   id: string;
@@ -18,9 +19,14 @@ interface Job {
 const AdminPage = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     fetchJobs();
+    // Check if user is admin
+    if (typeof window !== "undefined" && localStorage.getItem("isAdmin") !== "true") {
+      router.push("/admin/login");
+    }
   }, []);
 
   const fetchJobs = async () => {
